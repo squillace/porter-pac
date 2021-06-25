@@ -1,4 +1,4 @@
-package skeletor
+package pac
 
 import (
 	"get.porter.sh/porter/pkg/exec/builder"
@@ -14,7 +14,7 @@ type Action struct {
 
 // MarshalYAML converts the action back to a YAML representation
 // install:
-//   skeletor:
+//   pac:
 //     ...
 func (a Action) MarshalYAML() (interface{}, error) {
 	return map[string]interface{}{a.Name: a.Steps}, nil
@@ -27,7 +27,7 @@ func (a Action) MakeSteps() interface{} {
 
 // UnmarshalYAML takes any yaml in this form
 // ACTION:
-// - skeletor: ...
+// - pac: ...
 // and puts the steps into the Action.Steps field
 func (a *Action) UnmarshalYAML(unmarshal func(interface{}) error) error {
 	results, err := builder.UnmarshalAction(unmarshal, a)
@@ -57,7 +57,7 @@ func (a Action) GetSteps() []builder.ExecutableStep {
 }
 
 type Step struct {
-	Instruction `yaml:"skeletor"`
+	Instruction `yaml:"pac"`
 }
 
 // Actions is a set of actions, and the steps, passed from Porter.
@@ -66,12 +66,12 @@ type Actions []Action
 // UnmarshalYAML takes chunks of a porter.yaml file associated with this mixin
 // and populates it on the current action set.
 // install:
-//   skeletor:
+//   pac:
 //     ...
-//   skeletor:
+//   pac:
 //     ...
 // upgrade:
-//   skeletor:
+//   pac:
 //     ...
 func (a *Actions) UnmarshalYAML(unmarshal func(interface{}) error) error {
 	results, err := builder.UnmarshalAction(unmarshal, Action{})
@@ -106,7 +106,7 @@ type Instruction struct {
 }
 
 func (s Instruction) GetCommand() string {
-	return "skeletor"
+	return "pac"
 }
 
 func (s Instruction) GetArguments() []string {

@@ -1,5 +1,5 @@
 install:
-  - skeletor:
+  - pac:
       description: "Invalid Input Test Case"
       args:
       - yarrrr

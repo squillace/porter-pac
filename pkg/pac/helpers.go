@@ -1,4 +1,4 @@
-package skeletor
+package pac
 
 import (
 	"testing"
