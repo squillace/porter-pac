@@ -28,7 +28,10 @@ apt-get install zip unzip gpg tree curl -y && \
 mkdir -p cnab/app/ && \
 curl -l https://dotnet.microsoft.com/download/dotnet/scripts/v1/dotnet-install.sh -o cnab/app/dotnet-install.sh && \ 
 chmod +x cnab/app/dotnet-install.sh && \
-./cnab/app/dotnet-install.sh --version 5.0.301`
+./cnab/app/dotnet-install.sh --version 5.0.301 && \
+mkdir -p /cnab/app/tools && \
+curl -L https://www.nuget.org/api/v2/package/Microsoft.PowerApps.CLI.Core.linux-x64/1.8.5 --output /cnab/app/pac.nuget && \
+cd /cnab/app/ && unzip /cnab/app/pac.nuget && chmod +x /cnab/app/tools/pac`
 
 // Build will generate the necessary Dockerfile lines
 // for an invocation image using this mixin
